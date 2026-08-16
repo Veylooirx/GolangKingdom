@@ -47,6 +47,13 @@ func main() {
 		},
 	}
 
+	result, err := findUser(users, 12)
+
+	if err != nil {
+		return
+	}
+	fmt.Println(result)
+
 }
 
 
@@ -86,7 +93,8 @@ func deleteUser(users []User, ID int) ([]User, error){
 
 func findUser(users []User, ID int) (*User, error){ 
 
-	for i := 0; i < len(users); i ++ {
+	for i, _ := range users{
+
 		if users[i].ID == ID {
 			return &users[i], nil
 		}
