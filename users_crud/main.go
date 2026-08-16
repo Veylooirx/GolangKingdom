@@ -89,7 +89,7 @@ func deleteUser(users []User, ID int) ([]User, error){
 
 func findUser(users []User, ID int) (*User, error){ 
 
-	for i, _ := range users{
+	for i := range users{
 
 		if users[i].ID == ID {
 			return &users[i], nil
