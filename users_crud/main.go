@@ -47,15 +47,14 @@ func main() {
 		},
 	}
 
-	result, err := deleteUser(users, 13)
+	result, err := updateUser(users, 13, "pakomail", "johndoe")
 
 	if err != nil {
 		return
 	}
-	fmt.Println(result)
+	fmt.Println(*result)
 
 }
-
 
 func createUser(users []User, NewUser User) []User {
 
@@ -65,18 +64,16 @@ func createUser(users []User, NewUser User) []User {
 
 func updateUser(users []User, ID int, NewEmail string, NewName string) (*User, error){ 
 
-	for i := 0; i < len(users); i ++ {
-		if users[i].ID == ID {
+	userToUpdate, err := findUser(users, ID)
 
-			userToUpdate := &users[i] 
-
-			userToUpdate.Email = NewEmail
-			userToUpdate.Name = NewName
-			
-			return userToUpdate, nil
-		}
+	if err != nil {
+		return nil, errors.New("user not found")
 	}
-	return nil, errors.New("user not found")
+
+	userToUpdate.Email = NewEmail
+	userToUpdate.Name = NewName
+
+	return userToUpdate, nil
 }
 
 func deleteUser(users []User, ID int) ([]User, error){
