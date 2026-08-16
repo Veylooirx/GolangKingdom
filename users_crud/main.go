@@ -47,7 +47,7 @@ func main() {
 		},
 	}
 
-	result, err := findUser(users, 12)
+	result, err := deleteUser(users, 13)
 
 	if err != nil {
 		return
@@ -81,12 +81,11 @@ func updateUser(users []User, ID int, NewEmail string, NewName string) (*User, e
 
 func deleteUser(users []User, ID int) ([]User, error){
 
-	for i := 0; i < len(users); i ++ {
-		
-		if (users[i].ID == ID) {
-			users = append(users[:i], users[i+1:]...)
-			return users, nil
-		} 
+	for i := range users {
+		if users[i].ID == ID {
+			users =  append(users[:i], users[i+1:]...)
+			return users, nil 
+		}
 	}
 	return nil, errors.New("user not found")
 }
