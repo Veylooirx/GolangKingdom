@@ -11,6 +11,7 @@ type User struct {
 	Email  string
 }
 
+var ErrUserNotFound = errors.New("user not found")
 
 func main() {
 
@@ -67,7 +68,7 @@ func updateUser(users []User, ID int, NewEmail string, NewName string) (*User, e
 	userToUpdate, err := findUser(users, ID)
 
 	if err != nil {
-		return nil, errors.New("user not found")
+		return nil, err
 	}
 
 	userToUpdate.Email = NewEmail
@@ -84,7 +85,7 @@ func deleteUser(users []User, ID int) ([]User, error){
 			return users, nil 
 		}
 	}
-	return nil, errors.New("user not found")
+	return users, ErrUserNotFound
 }
 
 func findUser(users []User, ID int) (*User, error){ 
@@ -95,5 +96,5 @@ func findUser(users []User, ID int) (*User, error){
 			return &users[i], nil
 		}
 	}
-	return nil, errors.New("user not found")
+	return nil, ErrUserNotFound
 }
