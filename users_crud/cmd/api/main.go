@@ -23,6 +23,11 @@ func main() {
             Name:  "Pako L.",
             Email: "juande@mail.com",
         },
+		{
+            ID:    15,
+            Name:  "William D..",
+            Email: "williamd@mail.com",
+        },
     }
 
     result, err := internal.UpdateUser(
